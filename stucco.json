@@ -1,0 +1,14 @@
+{
+    "resolvers": {
+        "Query.getFile": {
+            "resolve": {
+                "name": "lib/Query/getFile"
+            }
+        },
+        "Mutation.uploadFile": {
+            "resolve": {
+                "name": "lib/Mutation/uploadFile"
+            }
+        }
+    }
+}
