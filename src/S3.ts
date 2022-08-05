@@ -30,11 +30,13 @@ const S3Client = () => {
     'SPACES_SECRET',
   ]);
 
-  const spacesEnpoint = new AWS.Endpoint(`${SPACES_REGION}.digitaloceanspaces.com`);
+  let spacesEndpoint;
+  const endpoint = process.env.SPACES_ENDPOINT;
+  if (endpoint) spacesEndpoint = new AWS.Endpoint(`${SPACES_REGION}.${endpoint}`);
 
   s3 = {
     client: new AWS.S3({
-      endpoint: spacesEnpoint,
+      endpoint: spacesEndpoint,
       accessKeyId: SPACES_KEY,
       secretAccessKey: SPACES_SECRET,
     }),
