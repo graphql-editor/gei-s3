@@ -1,5 +1,4 @@
 import AWS from 'aws-sdk';
-import crypto from 'crypto';
 
 interface S3Client {
   client: AWS.S3;
@@ -46,21 +45,13 @@ const S3Client = () => {
   return s3;
 };
 
-const genRandomString = (length: number) =>
-  crypto
-    .randomBytes(Math.ceil(length / 2))
-    .toString('hex')
-    .slice(0, length);
-
 export const putUrl = async ({
-  filename,
+  fileKey,
   contentType,
 }: {
-  filename: string;
+  fileKey: string;
   contentType: string;
 }): Promise<{ fileKey: string; putUrl: string }> => {
-  const fileKey = `${genRandomString(16)}-${filename}`;
-
   const s3 = S3Client();
   const params = {
     Bucket: s3.bucket,
